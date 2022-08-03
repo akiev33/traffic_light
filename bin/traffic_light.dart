@@ -7,9 +7,7 @@ enum Light { green, yellow, red }
 void main() {
   print('загорелся зеленый');
   traffic(Light.green);
-  print('горит желтый');
   traffic(Light.yellow);
-  print('горит красный');
   traffic(Light.red);
 }
 
@@ -27,6 +25,7 @@ traffic(Light light) async {
         }
         if ((green_timer_count) - timer.tick == 1) {
           timer.cancel();
+          print('горит желтый');
         }
 
         break;
@@ -46,10 +45,11 @@ traffic(Light light) async {
         print(red_timer_count - timer.tick);
 
         if ((red_timer_count) - timer.tick <= 3) {
-          print('Скоро загориться красный!');
+          print('Скоро загориться зеленый!');
         }
         if ((red_timer_count) - timer.tick == 1) {
           timer.cancel();
+          print('горит зеленый');
         }
         break;
 
