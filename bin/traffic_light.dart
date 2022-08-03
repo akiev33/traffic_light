@@ -5,15 +5,15 @@ import 'dart:async';
 enum Light { green, yellow, red }
 
 void main() {
-  print('загорелся зеленый');
+  // traffic(Light.green);
+  // traffic(Light.yellow);
+  // traffic(Light.red);
   traffic(Light.green);
-  traffic(Light.yellow);
-  traffic(Light.red);
 }
 
 traffic(Light light) async {
-  int green_timer_count = 5;
-  int yellow_timer_count = 3;
+  int green_timer_count = 20;
+  int yellow_timer_count = 5;
   int red_timer_count = 10;
   Timer.periodic(Duration(seconds: 1), (timer) {
     switch (light) {
@@ -21,11 +21,12 @@ traffic(Light light) async {
         print(green_timer_count - timer.tick);
 
         if ((green_timer_count) - timer.tick <= 3) {
-          print('Скоро загориться желтый');
+          print('Скоро загориться желтый!');
         }
         if ((green_timer_count) - timer.tick == 1) {
           timer.cancel();
-          print('горит желтый');
+          print('\nГорит желтый');
+          traffic(Light.yellow);
         }
 
         break;
@@ -37,6 +38,8 @@ traffic(Light light) async {
         }
         if ((yellow_timer_count) - timer.tick == 1) {
           timer.cancel();
+          print('\nГорит красный');
+          traffic(Light.red);
         }
 
         break;
@@ -49,10 +52,11 @@ traffic(Light light) async {
         }
         if ((red_timer_count) - timer.tick == 1) {
           timer.cancel();
-          print('горит зеленый');
+          print('\nГорит зеленый');
+          traffic(Light.green);
         }
+        
         break;
-
       default:
     }
   });
